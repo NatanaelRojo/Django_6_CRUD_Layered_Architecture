@@ -12,6 +12,8 @@ def validation_errors_handler(
     for error in exc.errors:
         field = error.get("loc", ["unknown"])[-1]
         message = error.get("msg", "Invalid input")
+        if message.startswith("Value error, "):
+            message = message.replace("Value error, ", "")
         errors.append(
             {
                 "field": field,
